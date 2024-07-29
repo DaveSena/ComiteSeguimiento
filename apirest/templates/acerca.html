@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+<!DOCTYPE html>
+
+<html>
+    <head>
+       
+{% block content %}
+
+    </head>
+    <body>
+<div class="mx-auto">
+            <form action="/"
+            <b><h4 style="text-shadow: 2px 2px 5px #000000;">CENTRO DE PRODUCCION DE SOLUCIONES INTELIGENTES -CPSI-<b></font></h4></div>
+                <div class="w3-card-4">
+                    <img src="{{url_for('static',filename='images/cpsi.png')}}"  style="height:250px;width:100%"  class="w3-padding-large">
+                </div>
+            
+            </form>
+
+        <script>
+            function Voy(){
+            location.href="/"
+            }
+            setTimeout('Voy()',5000)
+        </script>
+    </div>
+        {% endblock content %}
+    </body>
+</html>

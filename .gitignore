@@ -1,0 +1,9 @@
+/.python_modules/
+**/__pychache__/
+
+.venv
+env/
+
+__pycache__/
+*.py[cod]
+*$py.class

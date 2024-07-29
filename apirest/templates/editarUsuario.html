@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+<center>
+    <div class="sena-card"><br>
+    <center>
+    <div class="sena sena__information-card-title">
+        <h3 class="sena-sombra sena-color sena-p6 mx-auto" >EDITANDO USUARIO</h3>
+    </div>
+    <form name=mio action= "/niveles/u" method=POST>
+        <div class="sena__information-card-text"><br>
+        <font color=black>Nombre:</font></td><td colspan=2>
+        <input type=text name=nom id=nom value="{{cadena.NOMBRE}}" class="sena-fondo sena-p4" required><br>
+        <font color=black>Apellido:</font></td><td colspan=2>
+        <input type=text name=ape id=ape value="{{cadena.APELLIDO}}" class="sena-fondo sena-p4" required></br>
+        </div>
+        <div class="sena__information-card-text">
+            <hr>
+            <input type="submit" value="Grabar"  class="sena-btn sena-p3">
+            <input type=hidden name=id value="{{cadena.IDUSUA}}">
+            <input type="button" value="Regresar"  onclick="Ir1('/niveles/l')" class="sena-btns sena-p3 sena-round">
+            <hr>
+    
+    </form>
+</div>
+</div>
+    </div>
+    {% endblock content %}
