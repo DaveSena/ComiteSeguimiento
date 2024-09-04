@@ -1,4 +1,4 @@
-CREATE DATABASE  IF NOT EXISTS `comite` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+CREATE DATABASE `comite`;
 USE `comite`;
 -- MySQL dump 10.13  Distrib 8.0.38, for Win64 (x86_64)
 --
@@ -22,8 +22,7 @@ USE `comite`;
 --
 
 DROP TABLE IF EXISTS `acta`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+
 CREATE TABLE `acta` (
   `IdActa` int NOT NULL,
   `FechaActa` date NOT NULL,
@@ -31,8 +30,7 @@ CREATE TABLE `acta` (
   `DetallesActa` text NOT NULL,
   `IdPlanMejora` int NOT NULL,
   PRIMARY KEY (`IdActa`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+);
 
 --
 -- Dumping data for table `acta`
@@ -48,8 +46,7 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `citacion`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+
 CREATE TABLE `citacion` (
   `IdProceso` int NOT NULL,
   `Identificacion` int NOT NULL,
@@ -57,8 +54,7 @@ CREATE TABLE `citacion` (
   KEY `Identificacion` (`Identificacion`),
   CONSTRAINT `citacion_ibfk_1` FOREIGN KEY (`IdProceso`) REFERENCES `proceso` (`IdProceso`),
   CONSTRAINT `citacion_ibfk_2` FOREIGN KEY (`Identificacion`) REFERENCES `usuario` (`Identificacion`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+);
 
 --
 -- Dumping data for table `citacion`
@@ -74,15 +70,13 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `generar`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+
 CREATE TABLE `generar` (
   `IdProceso` int NOT NULL,
   `IdPlanMejora` int NOT NULL,
   KEY `IdProceso` (`IdProceso`),
   CONSTRAINT `generar_ibfk_1` FOREIGN KEY (`IdProceso`) REFERENCES `proceso` (`IdProceso`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+);
 
 --
 -- Dumping data for table `generar`
@@ -98,8 +92,7 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `proceso`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+
 CREATE TABLE `proceso` (
   `IdProceso` int NOT NULL,
   `FechaCitacion` date NOT NULL,
@@ -113,8 +106,7 @@ CREATE TABLE `proceso` (
   PRIMARY KEY (`IdProceso`),
   KEY `IdReporte` (`IdReporte`),
   CONSTRAINT `proceso_ibfk_1` FOREIGN KEY (`IdReporte`) REFERENCES `reporte` (`IdReporte`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+);
 
 --
 -- Dumping data for table `proceso`
@@ -130,8 +122,7 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `reporte`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+
 CREATE TABLE `reporte` (
   `IdReporte` int NOT NULL,
   `CedulaUsuario` int NOT NULL,
@@ -146,8 +137,7 @@ CREATE TABLE `reporte` (
   PRIMARY KEY (`IdReporte`),
   KEY `CedulaUsuario` (`CedulaUsuario`),
   CONSTRAINT `reporte_ibfk_1` FOREIGN KEY (`CedulaUsuario`) REFERENCES `usuario` (`Identificacion`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+);
 
 --
 -- Dumping data for table `reporte`
@@ -164,14 +154,11 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `roles`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `roles` (
   `id_rol` int NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
   PRIMARY KEY (`id_rol`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+);
 
 --
 -- Dumping data for table `roles`
@@ -188,8 +175,6 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `usuario`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `usuario` (
   `Identificacion` int NOT NULL AUTO_INCREMENT,
   `Nombre` text NOT NULL,
@@ -203,8 +188,7 @@ CREATE TABLE `usuario` (
   PRIMARY KEY (`Identificacion`),
   KEY `id_rol` (`id_rol`),
   CONSTRAINT `usuario_ibfk_1` FOREIGN KEY (`id_rol`) REFERENCES `roles` (`id_rol`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=2134534544 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+);
 
 --
 -- Dumping data for table `usuario`
