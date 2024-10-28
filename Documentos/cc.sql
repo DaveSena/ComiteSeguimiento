@@ -18,8 +18,9 @@
 --
 -- Table structure for table `acta`
 --
+create database comite;
+use comite;
 
-DROP TABLE IF EXISTS `acta`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `acta` (
@@ -45,7 +46,6 @@ UNLOCK TABLES;
 -- Table structure for table `citacion`
 --
 
-DROP TABLE IF EXISTS `citacion`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `citacion` (
@@ -71,7 +71,7 @@ UNLOCK TABLES;
 -- Table structure for table `generar`
 --
 
-DROP TABLE IF EXISTS `generar`;
+
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `generar` (
@@ -95,7 +95,7 @@ UNLOCK TABLES;
 -- Table structure for table `proceso`
 --
 
-DROP TABLE IF EXISTS `proceso`;
+
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `proceso` (
@@ -127,7 +127,7 @@ UNLOCK TABLES;
 -- Table structure for table `reporte`
 --
 
-DROP TABLE IF EXISTS `reporte`;
+
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `reporte` (
@@ -162,7 +162,7 @@ UNLOCK TABLES;
 -- Table structure for table `roles`
 --
 
-DROP TABLE IF EXISTS `roles`;
+
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `roles` (
@@ -186,7 +186,7 @@ UNLOCK TABLES;
 -- Table structure for table `tipo_falta`
 --
 
-DROP TABLE IF EXISTS `tipo_falta`;
+
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tipo_falta` (
@@ -211,7 +211,7 @@ UNLOCK TABLES;
 -- Table structure for table `usuario`
 --
 
-DROP TABLE IF EXISTS `usuario`;
+
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `usuario` (
