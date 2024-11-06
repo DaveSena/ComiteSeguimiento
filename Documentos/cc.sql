@@ -1,13 +1,13 @@
--- MariaDB dump 10.19  Distrib 10.4.28-MariaDB, for Win64 (AMD64)
+-- MySQL dump 10.13  Distrib 8.0.40, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: comite
+-- Host: localhost    Database: comite
 -- ------------------------------------------------------
--- Server version	10.4.28-MariaDB
+-- Server version	8.0.40
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!50503 SET NAMES utf8 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -22,13 +22,13 @@ create database comite;
 use comite;
 
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `acta` (
-  `IdActa` int(11) NOT NULL,
+  `IdActa` int NOT NULL,
   `FechaActa` date NOT NULL,
   `Hora` time NOT NULL,
-  `DetallesActa` text NOT NULL,
-  `IdPlanMejora` int(11) NOT NULL,
+  `DetallesActa` text COLLATE utf8mb4_general_ci NOT NULL,
+  `IdPlanMejora` int NOT NULL,
   PRIMARY KEY (`IdActa`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -46,11 +46,12 @@ UNLOCK TABLES;
 -- Table structure for table `citacion`
 --
 
+
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `citacion` (
-  `IdProceso` int(11) NOT NULL,
-  `Identificacion` int(11) NOT NULL,
+  `IdProceso` int NOT NULL,
+  `Identificacion` int NOT NULL,
   KEY `IdProceso` (`IdProceso`),
   KEY `Identificacion` (`Identificacion`),
   CONSTRAINT `citacion_ibfk_1` FOREIGN KEY (`IdProceso`) REFERENCES `proceso` (`IdProceso`),
@@ -73,10 +74,10 @@ UNLOCK TABLES;
 
 
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `generar` (
-  `IdProceso` int(11) NOT NULL,
-  `IdPlanMejora` int(11) NOT NULL,
+  `IdProceso` int NOT NULL,
+  `IdPlanMejora` int NOT NULL,
   KEY `IdProceso` (`IdProceso`),
   CONSTRAINT `generar_ibfk_1` FOREIGN KEY (`IdProceso`) REFERENCES `proceso` (`IdProceso`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -97,17 +98,17 @@ UNLOCK TABLES;
 
 
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `proceso` (
-  `IdProceso` int(11) NOT NULL,
+  `IdProceso` int NOT NULL,
   `FechaCitacion` date NOT NULL,
-  `Descargos` text NOT NULL,
-  `Decision` text NOT NULL,
-  `Estado` int(11) NOT NULL,
-  `Motivo` text NOT NULL,
-  `Resumen` text NOT NULL,
-  `Evidencias` text NOT NULL,
-  `IdReporte` int(11) NOT NULL,
+  `Descargos` text COLLATE utf8mb4_general_ci NOT NULL,
+  `Decision` text COLLATE utf8mb4_general_ci NOT NULL,
+  `Estado` int NOT NULL,
+  `Motivo` text COLLATE utf8mb4_general_ci NOT NULL,
+  `Resumen` text COLLATE utf8mb4_general_ci NOT NULL,
+  `Evidencias` text COLLATE utf8mb4_general_ci NOT NULL,
+  `IdReporte` int NOT NULL,
   PRIMARY KEY (`IdProceso`),
   KEY `IdReporte` (`IdReporte`),
   CONSTRAINT `proceso_ibfk_1` FOREIGN KEY (`IdReporte`) REFERENCES `reporte` (`IdReporte`)
@@ -124,28 +125,55 @@ LOCK TABLES `proceso` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `rechazo_reportes`
+--
+
+
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `rechazo_reportes` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `id_reporte` int DEFAULT NULL,
+  `nombre_rechazo` varchar(255) DEFAULT NULL,
+  `motivo_rechazo` text,
+  `fecha_rechazo` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `rechazo_reportes`
+--
+
+LOCK TABLES `rechazo_reportes` WRITE;
+/*!40000 ALTER TABLE `rechazo_reportes` DISABLE KEYS */;
+INSERT INTO `rechazo_reportes` VALUES (1,19,'galindo','porque si','2024-11-06 20:44:12');
+/*!40000 ALTER TABLE `rechazo_reportes` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `reporte`
 --
 
 
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `reporte` (
-  `IdReporte` int(11) NOT NULL AUTO_INCREMENT,
-  `Identificacion` int(11) NOT NULL,
-  `Nombre` text NOT NULL,
-  `Ficha` int(11) NOT NULL,
-  `ProgramaFormacion` text NOT NULL,
-  `Coordinacion` text NOT NULL,
-  `CausasReporte` text NOT NULL,
-  `Faltas` varchar(50) NOT NULL,
-  `EvidenciaPDF` text NOT NULL,
-  `TipoFalta` varchar(45) NOT NULL,
+  `IdReporte` int NOT NULL AUTO_INCREMENT,
+  `Identificacion` int NOT NULL,
+  `Nombre` text COLLATE utf8mb4_general_ci NOT NULL,
+  `Ficha` int NOT NULL,
+  `ProgramaFormacion` text COLLATE utf8mb4_general_ci NOT NULL,
+  `Coordinacion` text COLLATE utf8mb4_general_ci NOT NULL,
+  `CausasReporte` text COLLATE utf8mb4_general_ci NOT NULL,
+  `Faltas` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `EvidenciaPDF` text COLLATE utf8mb4_general_ci NOT NULL,
+  `TipoFalta` varchar(45) COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`IdReporte`),
   KEY `CedulaUsuario` (`Identificacion`),
   KEY `TipoFalta` (`TipoFalta`),
   CONSTRAINT `reporte_ibfk_1` FOREIGN KEY (`TipoFalta`) REFERENCES `tipo_falta` (`idtipo_falta`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -154,7 +182,7 @@ CREATE TABLE `reporte` (
 
 LOCK TABLES `reporte` WRITE;
 /*!40000 ALTER TABLE `reporte` DISABLE KEYS */;
-INSERT INTO `reporte` VALUES (8,1019602814,'David',2558697,'COMUNICACIÓN','Logistica','rompio un computador','Contribuir al desorden y/o desaseo','uploads\\Robutez - Proyecto comité de seguimiento.pdf','Leve'),(9,2147483647,'Damian',5478574,'MERCADEO','Sistemas','abcde','Otro','uploads\\Diagrama de casos de uso-Page-5.pdf','Gravísima'),(10,194007980,'Galindo',2525255,'SISTEMAS','Logistica','porquesi','Falsificar documentos oficiales','uploads\\Diagrama de casos de uso-Page-5.pdf','Grave'),(11,292031342,'dananana',3232226,'','Logistica','no hizo nada','Realizar fraude en evaluaciones','uploads\\Robutez - Proyecto comité de seguimiento.pdf','Leve'),(13,542343236,'Diana Yisel Martinez Montes',2558697,'ADSO','Artistica','robo','Hurtar, estafar o abusar de la confianza de cualqu','uploads\\INTERESADOS.pdf','Leve'),(14,292031342,'dananana',3232226,'','Artistica','eqwqwe','Falsificar documentos oficiales','uploads\\MER (1).pdf','Leve'),(15,194007980,'Galindo',2525255,'SISTEMAS','Artistica','ewafqfa','Actos que saboteen actividades de formación','uploads\\MER (1).pdf','Leve'),(16,2147483647,'Omar Muñoz',5478574,'COMUNICACIÓN','Artistica','sdfbewsfbcffe','Otro','uploads\\INTERESADOS.pdf','Leve'),(17,194007980,'Galindo',2525255,'SISTEMAS','Artistica','dsdqdsacdwdsvc','Realizar fraude en evaluaciones','uploads\\Robutez - Proyecto comité de seguimiento.pdf','Leve');
+INSERT INTO `reporte` VALUES (56,130004241,'Vanesa',5478574,'MERCADEO','Artistica','plagio','Otro','uploads\\colombia91.pdf','Leve'),(57,2147483647,'Omar Muñoz',5478574,'COMUNICACIÓN','Logistica','Robo de utiles','Destruir y dañar instalaciones físicas, equipos, software…','uploads\\TallerPracticaHTML.pdf','Leve'),(58,194007980,'Galindo',2525255,'SISTEMAS','Sistemas','Robarse un computador','Hurtar, estafar o abusar de la confianza de cualquier integrante de la comunidad educativa','uploads\\colombia91.pdf','Gravísima'),(59,292031342,'dananana',3232226,'ADSO','Sistemas','Dañar propiedad privada','Actos que saboteen actividades de formación','uploads\\colombia91.pdf','Leve'),(60,1019602814,'David',2558697,'ADSO','Artistica','ya no se me ocurre nada','Otro','uploads\\COL_Constitution_1991.pdf','Leve');
 /*!40000 ALTER TABLE `reporte` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -164,10 +192,10 @@ UNLOCK TABLES;
 
 
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `roles` (
-  `id_rol` int(11) NOT NULL AUTO_INCREMENT,
-  `descripcion` varchar(100) DEFAULT NULL,
+  `id_rol` int NOT NULL AUTO_INCREMENT,
+  `descripcion` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
   PRIMARY KEY (`id_rol`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -188,10 +216,10 @@ UNLOCK TABLES;
 
 
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `tipo_falta` (
-  `idtipo_falta` varchar(45) NOT NULL,
-  `descripcion` varchar(45) NOT NULL,
+  `idtipo_falta` varchar(45) COLLATE utf8mb4_general_ci NOT NULL,
+  `descripcion` varchar(45) COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`idtipo_falta`),
   KEY `idtipo_falta` (`idtipo_falta`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -213,17 +241,17 @@ UNLOCK TABLES;
 
 
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `usuario` (
-  `Identificacion` int(11) NOT NULL AUTO_INCREMENT,
-  `Nombre` varchar(100) NOT NULL,
-  `ProgramaFormacion` text NOT NULL,
-  `Ficha` int(11) DEFAULT NULL,
-  `Direccion` text NOT NULL,
-  `Telefono` varchar(30) NOT NULL,
-  `Correo` text NOT NULL,
-  `password` varchar(200) NOT NULL,
-  `id_rol` int(11) NOT NULL,
+  `Identificacion` int NOT NULL AUTO_INCREMENT,
+  `Nombre` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `ProgramaFormacion` text COLLATE utf8mb4_general_ci NOT NULL,
+  `Ficha` int DEFAULT NULL,
+  `Direccion` text COLLATE utf8mb4_general_ci NOT NULL,
+  `Telefono` varchar(30) COLLATE utf8mb4_general_ci NOT NULL,
+  `Correo` text COLLATE utf8mb4_general_ci NOT NULL,
+  `password` varchar(200) COLLATE utf8mb4_general_ci NOT NULL,
+  `id_rol` int NOT NULL,
   PRIMARY KEY (`Identificacion`),
   KEY `id_rol` (`id_rol`),
   CONSTRAINT `usuario_ibfk_1` FOREIGN KEY (`id_rol`) REFERENCES `roles` (`id_rol`)
@@ -236,7 +264,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (111111,'Omar Muñoz','',0,'casdafa','2147483','omar@misena.edu.co','0000',3),(3213131,'dananana','',0,'dadasdadada','1312323','dana@mariagarcia.com','3456',2),(10468595,'Ana','ADSO',0,'calle 12 #34','2334570','ana@gmail.com','2020',1),(10468596,'Carlos','ADSO',0,'avenida 9 #10','2334580','carlos@gmail.com','1234',2),(10468598,'Jorge','ADSO',0,'carrera 3 #6','2334600','jorge@gmail.com','0987',3),(10468599,'Sofia','EDSI',0,'calle 45 #78','2334610','sofia@gmail.com','123456',2),(12345678,'Omar Muñoz','',0,'Cr18p N67c 50 sur ','2147483','dana@mariagarcia.com','1111',2),(130004241,'Vanesa','MERCADEO',5478574,'ggjgjhghgy','1234521','vasky300@misena.edu.co','vivimosconvanesa',4),(194007980,'Galindo','SISTEMAS',2525255,'Cr18p N67c 50 sur ','3123131','jgalindo2024@gmail.com','1234',4),(292031342,'dananana','',3232226,'dadasdadada','1312323','dana@mariagarcia.com','3456',4),(542343236,'Diana Yisel Martinez Montes','ADSO',2558697,'Cr18p N67c 50 sur ','2147483647','dianamartinez@gmail.com','1234',4),(1019602814,'David','COMUNICACIÓN',2558697,'akndaksdj','1131456','davidsantimm2014@gmail.com','1234',4),(2147483647,'Omar Muñoz','COMUNICACIÓN',5478574,'cgtvt','2147483647','omaryesitmuños@gmail.com','3456',4);
+INSERT INTO `usuario` VALUES (111111,'Omar Muñoz','',0,'casdafa','2147483','omar@misena.edu.co','0000',3),(3213131,'DANA','',0,'dadasdadada','1312323','dana@mariagarcia.com','3456',2),(10468595,'Ana','ADSO',0,'calle 12 #34','2334570','ana@gmail.com','2020',1),(10468596,'Carlos','ADSO',0,'avenida 9 #10','2334580','carlos@gmail.com','1234',2),(10468598,'Jorge','ADSO',0,'carrera 3 #6','2334600','jorge@gmail.com','0987',3),(10468599,'Sofia','EDSI',0,'calle 45 #78','2334610','sofia@gmail.com','123456',2),(12345678,'Omar Muñoz','',0,'Cr18p N67c 50 sur ','2147483','dana@mariagarcia.com','1111',2),(130004241,'Vanesa','MERCADEO',5478574,'ggjgjhghgy','1234521','vasky300@misena.edu.co','vivimosconvanesa',4),(194007980,'Galindo','SISTEMAS',2525255,'Cr18p N67c 50 sur ','3123131','jgalindo2024@gmail.com','1234',4),(292031342,'dananana','ADSO',3232226,'dadasdadada','1312323','dana@mariagarcia.com','3456',4),(542343236,'Diana Yisel Martinez Montes','ADSO',2558697,'Cr18p N67c 50 sur ','2147483647','dianamartinez@gmail.com','1234',4),(1019602814,'David','COMUNICACIÓN',2558697,'akndaksdj','1131456','davidsantimm2014@gmail.com','1234',4),(2147483647,'Omar Muñoz','COMUNICACIÓN',5478574,'cgtvt','2147483647','omaryesitmuños@gmail.com','3456',4);
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -249,4 +277,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-10-28 15:37:18
+-- Dump completed on 2024-11-06 16:02:11
