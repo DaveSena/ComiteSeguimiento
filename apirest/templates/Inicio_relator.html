@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block content %}
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <a class="navbar-brand" href="ini_relator">
+      <img src="../static/images/comite_logo.png" class="logo">
+    </a>
+  <div class="container">
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link active" href="{{url_for('procesosRelator')}}"> </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" href="{{url_for('actaRelator')}}"> </a>
+        </li>
+        <form class="d-flex" role="search">
+          <!-- Dropdown -->
+        </form>
+        
+      
+    </div>
+    </div>
+  </nav>
+  <div style="width:70%;overflow:auto" class="w3-white w3-round-xxlarge w3-padding-large">
+
+    <div class="row" id="row-1">
+      <div class="col-md-12" id="columnMenu">
+        <div class="title-welcome">
+          <h1>Bienvenido</h1>
+        </div>
+      </div>
+      <div class="col-md-1" id="column1"></div>
+    </div>
+    <div class="row" id="row-2">  
+      <div class="col" id="options" href="{{url_for('procesosRelator')}}">
+        <div class="card-menu">
+            <div class="card-menu" onclick="location.href='procesosrelator';" style="cursor: pointer;">
+            <div class="card-body">
+                <a class="card-title">Procesos</a>
+                <i class="bi bi-search" id="menu"></i>
+          </div>
+          </div>
+        </div>
+      </div>        
+      <div class="col" id="options">
+        <div class="card-menu" href="{{url_for('actaRelator')}}">
+            <div class="card-menu" onclick="location.href='actarelator';" style="cursor: pointer;">
+            <div class="card-body">
+                <a class="card-title">Generar Acta</a>
+                <i class="bi bi-card-list" id="menu"></i>
+          </div>
+          </div>
+        </div>
+      </div>   
+    </div> 
+</div>
+{% endblock content %}

@@ -1,0 +1,44 @@
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<style>
+  .btn {
+    background-color: #6d9d6d;
+  }
+</style>
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <a class="navbar-brand" href="{{ url_for('inicioInstructor') }}">
+      <img src="../static/images/comite_logo.png" class="logo">
+    </a>
+    <div class="container">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link active me-3" href="{{ url_for('reportarInstructor2') }}">Realizar reporte</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active me-3" href="{{ url_for('consultarInstructor') }}">Consultar aprendiz</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active me-3" href='/usuariosInstructor'>Tabla aprendices</a>
+            </li>
+          </ul>
+          <form class="d-flex" role="search">
+            <div class="dropdown">
+              <button class="btn btn-submit dropdown-toggle" id="dropdownRelator" type="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                <i class="bi bi-person me-3"></i> Instructor
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownRelator">
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
+                <li><a class="dropdown-item text-danger" href="{{ url_for('loginUsuarios') }}">Salir</a></li>
+              </ul>
+            </div>
+          </form>
+          </div>
+          </div>
+      </nav>

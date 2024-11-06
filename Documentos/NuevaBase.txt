@@ -1,0 +1,86 @@
+-- No es necesario crear bases de datos en SQLite, ya que todo se maneja dentro de un solo archivo
+
+-- Tabla: acta
+CREATE TABLE IF NOT EXISTS acta (
+  IdActa INTEGER NOT NULL PRIMARY KEY,
+  FechaActa DATE NOT NULL,
+  Hora TIME NOT NULL,
+  DetallesActa TEXT NOT NULL,
+  IdPlanMejora INTEGER NOT NULL
+);
+
+-- Tabla: citacion
+CREATE TABLE IF NOT EXISTS citacion (
+  IdProceso INTEGER NOT NULL,
+  Identificacion INTEGER NOT NULL,
+  FOREIGN KEY (IdProceso) REFERENCES proceso(IdProceso),
+  FOREIGN KEY (Identificacion) REFERENCES usuario(Identificacion)
+);
+
+-- Tabla: generar
+CREATE TABLE IF NOT EXISTS generar (
+  IdProceso INTEGER NOT NULL,
+  IdPlanMejora INTEGER NOT NULL,
+  FOREIGN KEY (IdProceso) REFERENCES proceso(IdProceso)
+);
+
+-- Tabla: proceso
+CREATE TABLE IF NOT EXISTS proceso (
+  IdProceso INTEGER NOT NULL PRIMARY KEY,
+  FechaCitacion DATE NOT NULL,
+  Descargos TEXT NOT NULL,
+  Decision TEXT NOT NULL,
+  Estado INTEGER NOT NULL,
+  Motivo TEXT NOT NULL,
+  Resumen TEXT NOT NULL,
+  Evidencias TEXT NOT NULL,
+  IdReporte INTEGER NOT NULL,
+  FOREIGN KEY (IdReporte) REFERENCES reporte(IdReporte)
+);
+
+-- Tabla: reporte
+CREATE TABLE IF NOT EXISTS reporte (
+  IdReporte INTEGER NOT NULL PRIMARY KEY,
+  CedulaUsuario INTEGER NOT NULL,
+  Nombre TEXT NOT NULL,
+  Ficha INTEGER NOT NULL,
+  ProgramaFormacion TEXT NOT NULL,
+  Coordinacion TEXT NOT NULL,
+  TipoFalta TEXT NOT NULL,
+  CausasReporte TEXT NOT NULL,
+  Faltas VARCHAR(50) NOT NULL,
+  EvidenciaPDF TEXT NOT NULL,
+  FOREIGN KEY (CedulaUsuario) REFERENCES usuario(Identificacion)
+);
+
+-- Insertando datos en la tabla reporte
+INSERT INTO reporte (IdReporte, CedulaUsuario, Nombre, Ficha, ProgramaFormacion, Coordinacion, TipoFalta, CausasReporte, Faltas, EvidenciaPDF) 
+VALUES 
+(1, 10468595, 'Ana', 451231, 'ADSO', 'logistica', 'grave', 'El joven fomenta el desorden', 'Contribuir al desaseo', 'hello.PDF');
+
+-- Tabla: rolesinicio
+CREATE TABLE IF NOT EXISTS rolesinicio (
+  Rol INTEGER NOT NULL PRIMARY KEY,
+  Tipo_de_rol VARCHAR(45) DEFAULT NULL
+);
+
+-- Tabla: usuario
+CREATE TABLE IF NOT EXISTS usuario (
+  Identificacion INTEGER NOT NULL PRIMARY KEY,
+  Nombre TEXT NOT NULL,
+  ProgramaFormacion TEXT NOT NULL,
+  Ficha INTEGER NOT NULL,
+  Direccion TEXT NOT NULL,
+  Telefono INTEGER NOT NULL,
+  Correo TEXT NOT NULL,
+  Rol INTEGER NOT NULL
+);
+
+-- Insertando datos en la tabla usuario
+INSERT INTO usuario (Identificacion, Nombre, ProgramaFormacion, Ficha, Direccion, Telefono, Correo, Rol) 
+VALUES 
+(10468595, 'Ana', 'ADSO', 451231, 'calle 12 #34', 233457, 'ana@gmail.com', 2),
+(10468596, 'Carlos', 'ADSO', 451232, 'avenida 9 #10', 233458, 'carlos@gmail.com', 1),
+(10468597, 'Laura', 'ADSO', 451233, 'carrera 7 #8', 233459, 'laura@gmail.com', 2),
+(10468598, 'Jorge', 'ADSO', 451234, 'carrera 3 #6', 233460, 'jorge@gmail.com', 1),
+(10468599, 'Sofia', 'ADSO', 451235, 'calle 45 #78', 233461, 'sofia@gmail.com', 2);

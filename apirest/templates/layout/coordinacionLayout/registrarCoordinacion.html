@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+{% block content %}
+{% include "/layout/coordinacionLayout/navCoordinacion.html" %}
+
+<script>
+    function mostrarCampos() {
+        const id_rol = document.getElementById('id_rol').value;
+        const aprendizFields = document.getElementById('camposAprendiz');
+    
+        if (id_rol === '4') {
+            aprendizFields.style.display = 'block';
+        } else {
+            aprendizFields.style.display = 'none';
+        }
+    }
+</script>      
+
+<div class="col-sm-12" id="semicolumn">
+    <h3>Registrar</h3>
+    <div class="text-registrar">Digite los siguientes datos del aprendiz que desea registrar</div>
+    <form name="mio" method="POST" action="/crear-registro" class="form"> 
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="mb-3">
+                    <label for="Identificacion" class="form-label">Número de documento</label>
+                    <input type="text" class="form-control" id="Identificacion" name="Identificacion">
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="mb-3">
+                    <label for="Nombre" class="form-label">Nombre completo</label>
+                    <input type="text" class="form-control" id="Nombre" name="Nombre">
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="mb-3">
+                    <label for="password" class="form-label">Contraseña</label>
+                    <input type="text" class="form-control" id="password" name="password">
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="mb-3">
+                    <label for="Correo" class="form-label">Correo</label>
+                    <input type="text" class="form-control" id="Correo" name="Correo">
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="mb-3">
+                    <label for="Telefono" class="form-label">Teléfono</label>
+                    <input type="text" class="form-control" id="Telefono" name="Telefono">
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="mb-3">
+                    <label for="Direccion" class="form-label">Dirección</label>
+                    <input type="text" class="form-control" id="Direccion" name="Direccion">
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="mb-3">
+                    <label for="Rol" class="form-label">Rol </label>
+                    <select class="form-select" name="id_rol" id="id_rol" onchange="mostrarCampos()">
+                        <option selected disabled>Seleccione el rol</option>
+                        <option value="1">Coordinacion</option>
+                        <option value="2">Instructor</option>
+                        <option value="3">Relator</option>
+                        <option value="4">Aprendiz</option>
+                    </select>                    
+                </div>
+            </div>
+            <div class="col-sm-6" id="camposAprendiz" style="display:none;">
+                <div class="mb-3">
+                    <label for="Ficha" class="form-label">Ficha:</label>
+                    <select id="Ficha" name="Ficha" class="form-control">
+                    <option value="" selected disabled>Seleccione Ficha...</option>
+                        {% for ficha in fichas %}
+                            <option value="{{ ficha }}">{{ ficha }}</option>
+                        {% endfor %}
+                    </select><br>
+                </div>                       
+                <div class="mb-3">
+                    <label for="ProgramaFormacion" class="form-label">Programa de Formación:</label>
+                    <select id="ProgramaFormacion" name="ProgramaFormacion" class="form-control">
+                        <option value="">Seleccione un programa</option>
+                        {% for programa in programas_formacion %}
+                            <option value="{{ programa }}">{{ programa }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                
+            <div class="col-sm-12">
+                <div class="mb-3 text-center">
+                    {% if mensaje3 %}
+                    <div class="alert alert-success" role="alert">
+                        {{ mensaje3 }}
+                    </div>
+                    {% endif %}
+                    {% if mensaje4 %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ mensaje4 }}
+                    </div>
+                    {% endif %}
+                    <button type="submit" class="btn btn-submit" id="boton" value="Registrar">
+                        Enviar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+{% endblock content %}

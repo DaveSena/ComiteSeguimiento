@@ -1,0 +1,85 @@
+<div class="col-sm-12" id="semicolumn">
+    <h3>Rechazo de reporte a comite</h3>
+    <form class="form" action="" method="POST">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="mb-3">
+                    <label for="Ficha" class="form-label">Ficha</label>
+                    <select class="form-select" aria-label="Default select example" id="Ficha" name="Ficha">
+                        <option value="" selected disabled>Seleccione Ficha...</option>
+                        {% for x in fichas %}
+                        <option value="{{ x.Ficha }}">{{ x.Ficha }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="mb-3">
+                    <label for="Identificacion" class="form-label">Numero de identificación</label>
+                    <select class="form-select" aria-label="Default select example" id="Identificacion"
+                        name="Identificacion">
+                        <option value="" selected disabled>Seleccione Número de identificación...</option>
+                        {% for x in fichas %}
+                        <option value="{{ x.Identificacion }}" data-ficha="{{ x.Ficha }}">{{ x.Identificacion }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="mb-3">
+                    <label for="Nombre" class="form-label">Nombre de aprendiz</label>
+                    <select class="form-select" aria-label="Default select example" id="Nombre" name="Nombre">
+                        <option value="" selected disabled>Seleccione Nombre...</option>
+                        {% for x in fichas %}
+                        <option value="{{ x.Nombre }}" data-ficha="{{ x.Ficha }}">{{ x.Nombre }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="mb-3">
+                    <label for="ProgramaFormacion" class="form-label">Programa de formación</label>
+                    <select class="form-select" aria-label="Default select example" id="ProgramaFormacion" name="ProgramaFormacion">
+                        <option value="" selected disabled>Seleccione Programa de formación...</option>
+                        {% for x in fichas %}
+                        <option value="{{ x.ProgramaFormacion }}" data-ficha="{{ x.Ficha }}">{{ x.ProgramaFormacion }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+        </div>
+    </form>
+    <form action="" method="post">
+        <div class="mb-3">
+            <label for="causaRechazo" class="form-label">Causas de rechazo</label>
+            <textarea class="form-control" id="causes"></textarea>
+        </div>
+    </form>
+    <div class="mb-3 text-center">
+        <button type="submit" class="btn btn-submit" id="boton" value="Registrar" onclick="Va1('i')">Guardar</button>
+        <p id="message"></p>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#Ficha').change(function () {
+            var selectedFicha = $(this).val();
+
+            $('#Identificacion').val('').find('option').hide();
+            $('#Nombre').val('').find('option').hide();
+            $('#ProgramaFormacion').val('').find('option').hide();
+
+            $('#Identificacion option[data-ficha="' + selectedFicha + '"]').show();
+            $('#Nombre option[data-ficha="' + selectedFicha + '"]').show();
+            $('#ProgramaFormacion option[data-ficha="' + selectedFicha + '"]').show();
+        });
+    });
+
+</script>
+</body>
+</html>

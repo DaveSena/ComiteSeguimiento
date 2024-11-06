@@ -1,0 +1,40 @@
+<div class="col-sm-12" id="semicolumn">
+    <h3>Historial</h3>
+
+    {% if mensaje %}
+        <div class="alert alert-danger" role="alert">
+            {{ mensaje }}
+        </div>
+        
+        {% if redir %}
+            <script>
+                setTimeout(function() {
+                    window.location.href = "/consultarcoordinacion/";
+                }, 3000);
+            </script>
+        {% endif %}
+    {% endif %}
+
+    {% for reporte in reportes %}
+    <div class="card-historial">
+        <div class="card-header">Id del reporte: {{ reporte.IdReporte }}</div>
+        <div class="card-body">
+            <div class="columnas">
+                <h5 class="card-title-nombre">Información del aprendiz</h5>
+                <p class="card-text">Cédula: </p>{{ reporte.Identificacion }}
+                <p class="card-text">Nombre:</p> {{ reporte.Nombre }}
+                <p class="card-text">Ficha:</p> {{ reporte.Ficha }}
+                <p class="card-text">Programa formación:</p> {{ reporte.ProgramaFormacion }}
+                <p class="card-text">Coordinación:</p>{{ reporte.Coordinacion }}
+                <h5 class="card-title-nombre">Información del reporte</h5>
+                <p class="card-text">Tipo de falta:</p> {{ reporte.TipoFalta }}
+                <p class="card-text">Causas del reporte: </p>{{ reporte.CausasReporte }}
+                <p class="card-text">Faltas: </p>{{ reporte.Faltas }}
+                <p class="card-text">EvidenciaPDF:</p>{{ reporte.EvidenciaPDF }}
+            </div>
+        </div>
+        <a class="btn btn" id="boton-2" href="{{url_for('citacion')}}">Aceptar</a>
+        <a class="btn btn" id="boton-2" href="{{url_for('citacion')}}">Rechazar</a>
+    </div>
+    {% endfor %}
+</div>

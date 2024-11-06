@@ -1,0 +1,115 @@
+<style>
+  /* Estilos para las tarjetas */
+  #semicolumn {
+    padding: 20px;
+  }
+
+  .card-historial {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+  }
+
+  .card-header {
+    font-weight: bold;
+    background-color: #4187dacf;
+    color: white;
+    padding: 10px;
+  }
+
+  .card-body {
+    padding: 20px;
+  }
+
+  .card-title-nombre {
+    margin-bottom: 15px;
+    color: #6c757d;
+    font-weight: bold;
+  }
+
+  .card-text {
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+
+  .btn {
+    padding: 10px 20px;
+    font-size: 14px;
+    margin-right: 10px;
+  }
+
+  .btn-success {
+    background-color: #2cc04e;
+    color: white;
+  }
+
+  .btn-danger {
+    background-color: #f05160;
+    color: white;
+  }
+
+  /* Estilos para la paginación */
+  .pagination {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .pagination a {
+    margin: 0 10px;
+  }
+
+  .pagination span {
+    font-weight: bold;
+    margin: 0 10px;
+  }
+</style>
+
+<div class="col-sm-12" id="semicolumn">
+  {% for reporte in reportes %}
+    <div class="card-historial">
+      <div class="card-header">Id del reporte: {{ reporte.IdReporte }}</div>
+      <div class="card-body">
+        <div class="columnas">
+          <h4 class="card-title-nombre">Información del aprendiz</h4>
+          <p class="card-text">Cédula: {{ reporte.Identificacion }}</p>
+          <p class="card-text">Nombre: {{ reporte.Nombre }}</p>
+          <p class="card-text">Ficha: {{ reporte.Ficha }}</p>
+          <p class="card-text">Programa formación: {{ reporte.ProgramaFormacion }}</p>
+          <p class="card-text">Coordinación: {{ reporte.Coordinacion }}</p>
+          <p></p>
+          <h4 class="card-title-nombre">Información del reporte</h4>
+          <p class="card-text">Tipo de falta: {{ reporte.TipoFalta }}</p>
+          <p class="card-text">Causas del reporte: {{ reporte.CausasReporte }}</p>
+          <p class="card-text">Faltas: {{ reporte.Faltas }}</p>
+          <p class="card-text">EvidenciaPDF: {{ reporte.EvidenciaPDF }}</p>
+        </div>
+        <p>
+
+          
+        </p>
+        <a class="btn btn-success" href="{{ url_for('citacion') }}">Aceptar</a>
+        <form action="{{ url_for('eliminarReporte', id=reporte.IdReporte) }}" method="POST" style="display:inline;">
+          <button type="submit" class="btn btn-danger">Rechazar</button>
+        </form>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+
+        <div class="pagination">
+            {% if page > 1 %}
+                <a href="{{ url_for('procesosInstructor', page=page-1) }}">Anterior</a>
+            {% endif %}
+
+            <span>Página {{ page }} de {{ total_pages }}</span>
+
+            {% if page < total_pages %}
+                <a href="{{ url_for('procesosInstructor', page=page+1) }}">Siguiente</a>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

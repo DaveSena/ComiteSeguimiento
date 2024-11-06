@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        {% extends "base.html" %}
+{% block content %}
+
+    </head>
+    <body>
+
+            <form action="/ppl"
+            <div class="w3-container">
+            <header><font size=5 color=black><b>CENTRO DE PRODUCCION DE SOLUCIONES INTELIGENTES -CPSI -<b></font></header></div>
+            <img src="{{url_for('static',filename='images/cpsi.png')}}" width=70%>
+            
+            </form>
+
+        <script>
+            function Voy(){
+            location.href="/ppl"
+            }
+            setTimeout('Voy()',5000)
+        </script>
+        {% endblock content %}
+    </body>
+</html>
