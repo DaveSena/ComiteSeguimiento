@@ -138,8 +138,7 @@ CREATE TABLE `rechazo_reportes` (
   `motivo_rechazo` text,
   `fecha_rechazo` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+) ENGINE=InnoDB AUTO_INCREMENT=2;
 
 --
 -- Dumping data for table `rechazo_reportes`
